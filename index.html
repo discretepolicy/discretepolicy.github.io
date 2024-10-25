@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="description"
+        content="Discrete Policy: Learning Disentangled Action Space for Multi-Task Robotic Manipulation">
+  <meta name="keywords" content="Nerfies, D-NeRF, NeRF">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Discrete Policy: Learning Disentangled Action Space for Multi-Task Robotic Manipulation</title>
+
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-PYVRSFMDRL"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+
+    gtag('js', new Date());
+
+    gtag('config', 'G-PYVRSFMDRL');
+  </script>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+        rel="stylesheet">
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+  <link rel="icon" href="./static/images/logo.png">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
+</head>
+<body>
+
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          <h1 class="title is-1 publication-title">Discrete Policy: Learning Disentangled Action Space for Multi-Task Robotic Manipulation</h1>
+          <div class="is-size-5 publication-authors">
+            <span class="author-block">
+              <a>Kun Wu</a><sup>1,*</sup>,</span>
+            <span class="author-block">
+              <a>Yichen Zhu</a><sup>2,*</sup>,</span>
+            </span>
+            <span class="author-block">
+              <a>Jinming Li</a><sup>3</sup>,
+            </span>
+            <span class="author-block">
+              <a>Junjie Wen</a><sup>4</sup>,
+            </span>
+          </div>
+          <div class="is-size-5 publication-authors">
+            <span class="author-block">
+              <a>Ning Liu</a><sup>2</sup>,
+            </span>
+            <span class="author-block">
+              <a>Zhiyuan Xu</a><sup>5</sup>,
+            </span>
+            <span class="author-block">
+              <a>Qinru Qiu</a><sup>1</sup>,
+            <span class="author-block">
+              <a>Jian Tang</a><sup>5</sup>,
+            </span>
+          </div>
+
+          <div class="is-size-5 publication-authors">
+            <span class="author-block"><sup>1</sup>Syracuse University,</span>
+            <span class="author-block"><sup>2</sup>Midea Group,</span>
+            <span class="author-block"><sup>3</sup>Shanghai University,</span>
+            <span class="author-block"><sup>4</sup>East China Normal University,</span>
+            <span class="author-block"><sup>5</sup>Beijing Innovation Center of Humanoid Robotics,</span>
+          </div>
+          <div class="is-size-5 publication-authors">
+            <span class="author-block"><sup>*</sup>Equal contribution</span>
+          </div>
+
+          <div class="column has-text-centered">
+            <div class="publication-links">
+              <!-- PDF Link. -->
+
+              <!-- Video Link. -->
+              <!-- <span class="link-block">
+                <a href="https://www.youtube.com/watch?v=MrKrnHhk8IA"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-youtube"></i>
+                  </span>
+                  <span>Video</span>
+                </a>
+              </span> -->
+              <!-- Code Link. -->
+
+              <!-- </span> -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section class="hero is-light is-small">
+  <div class="hero-body">
+    <div class="container">
+      <div id="results-carousel" class="carousel results-carousel">
+        <div class="item item-dual_BreadDrawer_succ">
+          <video poster="" id="dual_BreadDrawer_succ" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/ours_dual/dual_BreadDrawer_succ_1.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        <div class="item item-dual_BreadTransfer_succ">
+          <video poster="" id="dual_BreadTransfer_succ" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/ours_dual/dual_BreadTransfer_succ_1.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        <div class="item item-dual_StackBlock_succ">
+          <video poster="" id="dual_StackBlock_succ" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/ours_dual/dual_StackBlock_succ_1.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        <div class="item item-dual_SweepPaper-1_succ">
+          <video poster="" id="dual_SweepPaper-1_succ" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/ours_dual/dual_SweepPaper-1_succ_1.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        <div class="item item-dual_SweepPaper-2_succ">
+          <video poster="" id="dual_SweepPaper-2_succ" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/ours_dual/dual_SweepPaper-2_succ_1.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        <div class="item item-dual_TennisBallPack_succ">
+          <video poster="" id="dual_TennisBallPack_succ" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/ours_dual/dual_TennisBallPack_succ_1.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="hero is-light is-small">
+  <div class="hero-body">
+    <div class="container">
+      <div id="results-carouse2" class="carousel results-carousel">
+        <div class="item item-ours_ArrangeFlower_succ">
+          <video poster="" id="ours_ArrangeFlower_succ" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/ours_single/ours_ArrangeFlower_succ_1.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        <div class="item item-ours_CloseDrawer_succ">
+          <video poster="" id="ours_CloseDrawer_succ" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/ours_single/ours_CloseDrawer_succ_1.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        <div class="item item-ours_CloseMicrowave_succ">
+          <video poster="" id="ours_CloseMicrowave_succ" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/ours_single/ours_CloseMicrowave_succ_1.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        <div class="item item-ours_DisposePaper_succ">
+          <video poster="" id="ours_DisposePaper_succ" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/ours_single/ours_DisposePaper_succ_1.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        <div class="item item-ours_InsertToast_succ">
+          <video poster="" id="ours_InsertToast_succ" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/ours_single/ours_InsertToast_succ_1.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        <div class="item item-ours_OpenBox_succ">
+          <video poster="" id="ours_OpenBox_succ" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/ours_single/ours_OpenBox_succ_1.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        <div class="item item-ours_OpenDrawer_succ">
+          <video poster="" id="ours_OpenDrawer_succ" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/ours_single/ours_OpenDrawer_succ_1.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        <div class="item item-ours_PlaceCan_succ">
+          <video poster="" id="ours_PlaceCan_succ" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/ours_single/ours_PlaceCan_succ_1.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        <div class="item item-ours_PlaceTennis_succ">
+          <video poster="" id="ours_PlaceTennis_succ" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/ours_single/ours_PlaceTennis_succ_1.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        <div class="item item-ours_StackBlock_succ">
+          <video poster="" id="ours_StackBlock_succ" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/ours_single/ours_StackBlock_succ_1.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        <div class="item item-ours_StoreToyCar_succ">
+          <video poster="" id="ours_StoreToyCar_succ" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/ours_single/ours_StoreToyCar_succ_1.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        <div class="item item-ours_UprightMug_succ">
+          <video poster="" id="ours_UprightMug_succ" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/ours_single/ours_UprightMug_succ_1.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <!-- Abstract. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
+          Learning visuomotor policy for multi-task robotic manipulation has been a long-standing challenge for the robotics community. The difficulty lies in the diversity of action space: typically, a goal can be accomplished in multiple ways, resulting in a multimodal action distribution for a single task. The complexity of action distribution escalates as the number of tasks increases. In this work, we propose <b style="font-weight:900;">Discrete Policy</b>, a robot learning method for training universal agents capable of multi-task manipulation skills. Discrete Policy employs vector quantization to map action sequences into a discrete latent space, facilitating the learning of task-specific codes. These codes are then reconstructed into the action space conditioned on observations and language instruction. We evaluate our method on both simulation and multiple real-world embodiments, including both single-arm and bimanual robot settings. We demonstrate that our proposed Discrete Policy outperforms a well-established Diffusion Policy baseline and many state-of-the-art approaches, including ACT, Octo, and OpenVLA. For example, in a real-world multi-task training setting with five tasks, Discrete Policy achieves an average success rate that is 26% higher than Diffusion Policy and 15\% higher than OpenVLA. As the number of tasks increases to 12, the performance gap between Discrete Policy and Diffusion Policy widens to 32.5%, further showcasing the advantages of our approach. Our work empirically demonstrates that learning multi-task policies within the latent space is a vital step toward achieving general-purpose agents.
+        </div>
+      </div>
+    </div>
+    <!--/ Abstract. -->
+
+    <!-- Paper video. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <!-- <h2 class="title is-3">Video</h2> -->
+        <div class="publication-video">
+          <video poster="" id="framework" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/discrete_policy_overview.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+      </div>
+    </div>
+    <!--/ Paper video. -->
+  </div>
+</section>
+
+
+<section class="section">
+  <div class="container is-max-desktop">
+
+    <div class="columns is-centered">
+      <div class="column is-full-width">
+        <!-- Model Architecture. -->
+        <h3 class="title is-4">Overview of Discrete Policy</h3>
+        <div class="column has-text-centered">
+          <img src="./static/images/overview_model_1.png"
+                class="model-architecture"/>
+        </div>
+        <div class="content has-text-justified">
+          <p>
+            <b style="font-weight:900;">Discrete Policy</b>: In the first training stage, as indicated by the green arrow, we train a VQ-VAE that maps actions into discrete latent space with an encoder and then reconstructs the actions based on the latent embeddings using a decoder. In the second training stage, as indicated by the brown arrow, we train a latent diffusion model that predicts task-specific latent embeddings to guide the decoder in predicting accurate actions.
+          </p>
+        </div>
+        <br/>
+        <!-- Model Architecture. -->
+
+        <!-- Experimental Results. -->
+        <h2 class="title is-3">Experiments</h2>
+        <div class="content has-text-justified">
+          <p>
+            We ask the following key questions about the effectiveness of our algorithm:
+            1) Can Discrete Policy be effectively deployed to real-world scenarios?
+            2) Can Discrete Policy be scaled up to multiple complex tasks?
+            3) Can Discrete Policy effectively distinguish different behavioral modalities across multiple tasks?
+            In order to answer these questions, we built a real-world robotic arm environment, 
+            designed a variety of manipulation tasks that contain rich skill requirements and long-horizon tasks, 
+            and finally conducted extensive experiments.
+          </p>
+        </div>
+        
+        <h2 class="title is-4">Task Description for Real-World Experiments</h2>
+        <div class="column has-text-centered">
+          <img src="./static/images/all_single_task_demo.png"
+                class="all_single_task_demo"/>
+        </div>
+        <div class="content has-text-justified">
+          <p>
+            For the <b>single-arm Franka</b> experiments, we designed two multi-task evaluation protocols named Multi-Task 5 (MT-5) and Multi-Task 12 (MT-12). <br>
+            <b>MT-5</b> contains 5 tasks: 1) PlaceTennis. 2) OpenDrawer. 3) OpenBox. 4) StackBlock. 5) UprightMug. <br>
+            <b>MT-12</b> extends MT-5's task range to 12 tasks, including 3 long-horizon tasks, more varied scenarios, and more complex skill requirements such as flip, press, and pull. <br>
+            The 12 tasks are: 1) PlaceTennis. 2) OpenDrawer. 3) OpenBox. 4) StackBlock. 5) UprightMug. 6) CloseDrawer. 7) PlaceCan. 8) ArrangeFlower. 9) CloseMicrowave. 10) InsertToast. 11) StoreToyCar. 12) DisposePaper.
+          </p>
+        </div>
+        <div class="column has-text-centered">
+          <img src="./static/images/DA-MT-6_demo.png"
+                class="DA-MT-6_demo"/>
+        </div>
+        <div class="content has-text-justified">
+          <p>
+            For the <b>bimanual UR5</b> robotic experiments, we designed 6 challenging tasks that require collaboration between two robotic arms. <br>
+            The 6 tasks are: 1) TennisBallPack. 2) BreadTransfer. 3) StackBlock. 4) BreadDrawer. 5) SweepPaper-1. 6) SweepPaper-2.
+          </p>
+        </div>
+        
+
+        <!-- Quantitative Comparison. -->
+        <h2 class="title is-4">Quantitative Comparison</h2>
+        <div class="content has-text-justified">
+          <p>
+            <b>Results on Single-arm Franka Robot.</b>
+          </p>
+        </div>
+        <div class="column has-text-centered">
+          <img src="./static/images/mt5-12_results_new_image.png"
+                class="mt5-12_results_new_image"/>
+        </div>
+        <div class="content has-text-justified">
+          <p>
+            The figures on the left and right show the success rates on the MT-5 and MT-12, respectively.
+          </p>
+        </div>
+        <div class="content has-text-justified">
+          <!-- all. --> 
+          <table style="width:90%; margin:auto;">
+            <caption>Comparisons on Multi-Task 5 (MT-5) in the single Franka robot, with success rates reported and the best results highlighted in bold. The symbol * denotes that methods are pretrained by 970K OpenX robot data.</caption>
+            <thead>
+              <tr>
+                <th rowspan="1" style="vertical-align: middle;"><strong>Method</strong></th>
+                <th colspan="1" style="text-align: center;">PlaceTennis</th>
+                <th colspan="1" style="text-align: center;">OpenDrawer</th>
+                <th colspan="1" style="text-align: center;">OpenBox</th>
+                <th colspan="1" style="text-align: center;">StackBlock</th>
+                <th colspan="1" style="text-align: center;">UprightMug</th>
+                <th rowspan="1" style="vertical-align: middle;"><strong>Average</strong></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr style="text-align: center;">
+                <td>RT-1</td>
+                <td>25</td>
+                <td>30</td>
+                <td>30</td>
+                <td>10</td>
+                <td>15</td>
+                <td>22</td>
+              </tr>
+              <tr style="text-align: center;">
+                <td style="width: 100px;">BeT</td>
+                <td>45</td>
+                <td>30</td>
+                <td>65</td>
+                <td>30</td>
+                <td>15</td>
+                <td>37</td>
+              </tr>
+              <tr style="text-align: center;">
+                <td>BESO</td>
+                <td>40</td>
+                <td>30</td>
+                <td>55</td>
+                <td>25</td>
+                <td>15</td>
+                <td>33</td>
+              </tr>
+              <tr style="text-align: center;">
+                <td>MDT</td>
+                <td>50</td>
+                <td>35</td>
+                <td>55</td>
+                <td>20</td>
+                <td>25</td>
+                <td>37</td>
+              </tr>
+              <tr style="text-align: center;">
+                <td>Octo<sup>*</sup></td>
+                <td>40</td>
+                <td>55</td>
+                <td>50</td>
+                <td>30</td>
+                <td>40</td>
+                <td>43</td>
+              </tr>
+              <tr style="text-align: center;">
+                <td>OpenVLA<sup>*</sup></td>
+                <td>85</td>
+                <td>80</td>
+                <td>90</td>
+                <td>40</td>
+                <td>50</td>
+                <td>69</td>
+              </tr>
+              <tr style="text-align: center;">
+                <td>MT-ACT</td>
+                <td>80</td>
+                <td>80</td>
+                <td>100</td>
+                <td>55</td>
+                <td>45</td>
+                <td>59</td>
+              </tr>
+              <tr style="text-align: center;">
+                <td>Diffusion Policy</td>
+                <td>60</td>
+                <td>55</td>
+                <td>80</td>
+                <td>50</td>
+                <td>45</td>
+                <td>58</td>
+              </tr>
+              <tr style="text-align: center;">
+                <td>Discrete Policy</td>
+                <td>85</td>
+                <td>90</td>
+                <td>100</td>
+                <td>75</td>
+                <td>70</td>
+                <td>84</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        
+        <div class="content has-text-justified">
+          <p>
+            <b>Results on Bimanual UR5 robot.</b>
+          </p>
+        </div>
+        <div class="content has-text-justified">
+          <!-- all. --> 
+          <table style="width:90%; margin:auto;">
+            <caption>Comparing Discrete Policy with baseline methods on six bimanual UR5 robot tasks.</caption>
+            <thead>
+              <tr>
+                <th rowspan="1" style="vertical-align: middle;"><strong>Method</strong></th>
+                <th colspan="1" style="text-align: center;">TennisBallPack</th>
+                <th colspan="1" style="text-align: center;">BreadTransfer</th>
+                <th colspan="1" style="text-align: center;">StackBlock</th>
+                <th colspan="1" style="text-align: center;">BreadDrawer</th>
+                <th colspan="1" style="text-align: center;">SweepPaper-1</th>
+                <th colspan="1" style="text-align: center;">SweepPaper-2</th>
+                <th rowspan="1" style="vertical-align: middle;"><strong>Average</strong></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr style="text-align: center;">
+                <td>BeT</td>
+                <td>30</td>
+                <td>10</td>
+                <td>0</td>
+                <td>30</td>
+                <td>40</td>
+                <td>20</td>
+                <td>21.7</td>
+              </tr>
+              <tr style="text-align: center;">
+                <td style="width: 100px;">MT-ACT</td>
+                <td>70</td>
+                <td>40</td>
+                <td>10</td>
+                <td>70</td>
+                <td>80</td>
+                <td>60</td>
+                <td>55.0</td>
+              </tr>
+              <tr style="text-align: center;">
+                <td>Diffusion Policy</td>
+                <td>30</td>
+                <td>35</td>
+                <td>0</td>
+                <td>45</td>
+                <td>65</td>
+                <td>50</td>
+                <td>37.5</td>
+              </tr>
+              <tr style="text-align: center;">
+                <td>Discrete Policy</td>
+                <td>70</td>
+                <td>55</td>
+                <td>30</td>
+                <td>85</td>
+                <td>85</td>
+                <td>75</td>
+                <td>65.8</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 class="title is-4">Visualization of Discrete Policy</h2>
+        <div class="column has-text-centered">
+          <img src="./static/images/tsne_skill_2.png"
+                class="tsne_skill_2"/>
+        </div>
+        <div class="content has-text-justified">
+          <p>
+            The t-SNE visualization of feature embeddings from Discrete Policy reveals that skills across different tasks cluster closely together. This pattern suggests that discrete latent spaces are capable of disentangling the complex, multimodal action distributions encountered in multi-task policy learning.
+          </p>
+        </div>
+
+
+        <!-- Quantitative Comparison. -->
+        
+        <br/>
+        <!-- Qualitative Comparison. -->
+        <h2 class="title is-4">Qualitative Comparison</h2>
+        <div class="content has-text-justified">
+          <p>
+            We qualitatively compare discrete policy with diffusion policy and show some cases where diffusion policy fails.
+          </p>
+        <div class="columns">
+          <div class="column has-text-centered">
+            <p style="font-size: 150%"><b>Discrete Policy (Ours)</b></p>
+              <video poster="" id=""autoplay controls muted loop height="100%" playbackRate=2.0 style="border-radius: 5px;">
+                  <source src="static/videos/ours_single/ours_ArrangeFlower_succ_1.mp4" type="video/mp4">
+              </video>
+          </div>
+          <div class="column has-text-centered">
+            <p style="font-size: 150%"><b>Diffusion Policy</b></p>
+              <video poster="" id=""autoplay controls muted loop height="100%" playbackRate=2.0 style="border-radius: 5px;">
+                  <source src="static/videos/diffusion_fail/diffusion_ArrangeFlower_fail_1.mp4" type="video/mp4">
+              </video>
+          </div>
+        </div>
+        <div class="columns">
+          <div class="column has-text-centered">
+              <video poster="" id=""autoplay controls muted loop height="100%" playbackRate=2.0 style="border-radius: 5px;">
+                  <source src="static/videos/ours_single/ours_CloseDrawer_succ_1.mp4" type="video/mp4">
+              </video>
+          </div>
+          <div class="column has-text-centered">
+              <video poster="" id=""autoplay controls muted loop height="100%" playbackRate=2.0 style="border-radius: 5px;">
+                  <source src="static/videos/diffusion_fail/diffusion_CloseDrawer_fail_1.mp4" type="video/mp4">
+              </video>
+          </div>
+        </div>
+        <div class="columns">
+          <div class="column has-text-centered">
+              <video poster="" id=""autoplay controls muted loop height="100%" playbackRate=2.0 style="border-radius: 5px;">
+                  <source src="static/videos/ours_single/ours_CloseMicrowave_succ_1.mp4" type="video/mp4">
+              </video>
+          </div>
+          <div class="column has-text-centered">
+              <video poster="" id=""autoplay controls muted loop height="100%" playbackRate=2.0 style="border-radius: 5px;">
+                  <source src="static/videos/diffusion_fail/diffusion_CloseMicrowave_fail_1.mp4" type="video/mp4">
+              </video>
+          </div>
+        </div>
+        <div class="columns">
+          <div class="column has-text-centered">
+              <video poster="" id=""autoplay controls muted loop height="100%" playbackRate=2.0 style="border-radius: 5px;">
+                  <source src="static/videos/ours_single/ours_DisposePaper_succ_1.mp4" type="video/mp4">
+              </video>
+          </div>
+          <div class="column has-text-centered">
+              <video poster="" id=""autoplay controls muted loop height="100%" playbackRate=2.0 style="border-radius: 5px;">
+                  <source src="static/videos/diffusion_fail/diffusion_DisposePaper_fail_1.mp4" type="video/mp4">
+              </video>
+          </div>
+        </div>
+        <div class="columns">
+          <div class="column has-text-centered">
+              <video poster="" id=""autoplay controls muted loop height="100%" playbackRate=2.0 style="border-radius: 5px;">
+                  <source src="static/videos/ours_single/ours_InsertToast_succ_1.mp4" type="video/mp4">
+              </video>
+          </div>
+          <div class="column has-text-centered">
+              <video poster="" id=""autoplay controls muted loop height="100%" playbackRate=2.0 style="border-radius: 5px;">
+                  <source src="static/videos/diffusion_fail/diffusion_InsertTot_fail_1.mp4" type="video/mp4">
+              </video>
+          </div>
+        </div>
+        <div class="columns">
+          <div class="column has-text-centered">
+              <video poster="" id=""autoplay controls muted loop height="100%" playbackRate=2.0 style="border-radius: 5px;">
+                  <source src="static/videos/ours_single/ours_OpenBox_succ_1.mp4" type="video/mp4">
+              </video>
+          </div>
+          <div class="column has-text-centered">
+              <video poster="" id=""autoplay controls muted loop height="100%" playbackRate=2.0 style="border-radius: 5px;">
+                  <source src="static/videos/diffusion_fail/diffusion_OpenBox_fail_1.mp4" type="video/mp4">
+              </video>
+          </div>
+        </div>
+        <div class="columns">
+          <div class="column has-text-centered">
+              <video poster="" id=""autoplay controls muted loop height="100%" playbackRate=2.0 style="border-radius: 5px;">
+                  <source src="static/videos/ours_single/ours_OpenDrawer_succ_1.mp4" type="video/mp4">
+              </video>
+          </div>
+          <div class="column has-text-centered">
+              <video poster="" id=""autoplay controls muted loop height="100%" playbackRate=2.0 style="border-radius: 5px;">
+                  <source src="static/videos/diffusion_fail/diffusion_OpenDrawer_fail_1.mp4" type="video/mp4">
+              </video>
+          </div>
+        </div>
+        <div class="columns">
+          <div class="column has-text-centered">
+              <video poster="" id=""autoplay controls muted loop height="100%" playbackRate=2.0 style="border-radius: 5px;">
+                  <source src="static/videos/ours_single/ours_PlaceCan_succ_1.mp4" type="video/mp4">
+              </video>
+          </div>
+          <div class="column has-text-centered">
+              <video poster="" id=""autoplay controls muted loop height="100%" playbackRate=2.0 style="border-radius: 5px;">
+                  <source src="static/videos/diffusion_fail/diffusion_PlaceCan_fail_1.mp4" type="video/mp4">
+              </video>
+          </div>
+        </div>
+        <div class="columns">
+          <div class="column has-text-centered">
+              <video poster="" id=""autoplay controls muted loop height="100%" playbackRate=2.0 style="border-radius: 5px;">
+                  <source src="static/videos/ours_single/ours_PlaceTennis_succ_1.mp4" type="video/mp4">
+              </video>
+          </div>
+          <div class="column has-text-centered">
+              <video poster="" id=""autoplay controls muted loop height="100%" playbackRate=2.0 style="border-radius: 5px;">
+                  <source src="static/videos/diffusion_fail/diffusion_PlaceTennis_fail_1.mp4" type="video/mp4">
+              </video>
+          </div>
+        </div>
+        <div class="columns">
+          <div class="column has-text-centered">
+              <video poster="" id=""autoplay controls muted loop height="100%" playbackRate=2.0 style="border-radius: 5px;">
+                  <source src="static/videos/ours_single/ours_StackBlock_succ_1.mp4" type="video/mp4">
+              </video>
+          </div>
+          <div class="column has-text-centered">
+              <video poster="" id=""autoplay controls muted loop height="100%" playbackRate=2.0 style="border-radius: 5px;">
+                  <source src="static/videos/diffusion_fail/diffusion_StackBlock_fail_1.mp4" type="video/mp4">
+              </video>
+          </div>
+        </div>
+        <div class="columns">
+          <div class="column has-text-centered">
+              <video poster="" id=""autoplay controls muted loop height="100%" playbackRate=2.0 style="border-radius: 5px;">
+                  <source src="static/videos/ours_single/ours_StoreToyCar_succ_1.mp4" type="video/mp4">
+              </video>
+          </div>
+          <div class="column has-text-centered">
+              <video poster="" id=""autoplay controls muted loop height="100%" playbackRate=2.0 style="border-radius: 5px;">
+                  <source src="static/videos/diffusion_fail/diffusion_StoreToyCar_fail_1.mp4" type="video/mp4">
+              </video>
+          </div>
+        </div>
+        <div class="columns">
+          <div class="column has-text-centered">
+              <video poster="" id=""autoplay controls muted loop height="100%" playbackRate=2.0 style="border-radius: 5px;">
+                  <source src="static/videos/ours_single/ours_UprightMug_succ_1.mp4" type="video/mp4">
+              </video>
+          </div>
+          <div class="column has-text-centered">
+              <video poster="" id=""autoplay controls muted loop height="100%" playbackRate=2.0 style="border-radius: 5px;">
+                  <source src="static/videos/diffusion_fail/diffusion_UprightMug_fail_1.mp4" type="video/mp4">
+              </video>
+          </div>
+        </div>
+        <!--/ Experimental Results. -->
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="BibTeX">
+  <div class="container is-max-desktop content">
+    <h2 class="title">BibTeX</h2>
+    <pre><code>@article{wu2024discrete,
+      title={Discrete Policy: Learning Disentangled Action Space for Multi-Task Robotic Manipulation},
+      author={Wu, Kun and Zhu, Yichen and Li, Jinming and Wen, Junjie and Liu, Ning and Xu, Zhiyuan and Qiu, Qinru and Tang, Jian},
+      journal={arXiv preprint arXiv:2409.18707},
+      year={2024}
+    }</code></pre>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column">
+        <div class="content has-text-centered">
+          <p>
+            Website template borrowed from <a
+                                href="https://github.com/nerfies/nerfies.github.io">NeRFies</a>
+                                and <a href="https://eureka-research.github.io/">Eureka</a>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
